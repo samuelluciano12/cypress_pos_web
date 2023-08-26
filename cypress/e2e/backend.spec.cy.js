@@ -25,7 +25,7 @@ describe("BackEnd Test", () => {
         })
     })    
 
-    it.only("Requisição HTTP POST 2", () => {
+    it("Requisição HTTP POST 2", () => {
       
         cy.request({
             method: 'POST',
