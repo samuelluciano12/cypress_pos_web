@@ -1,6 +1,8 @@
-describe ("Tickets", () => {
+import ticketsPage from "../Pages/Tickets/TicketsPage";
 
-    beforeEach (() => cy.visit('https://ticket-box.s3.eu-central-1.amazonaws.com/index.html'));
+describe("Tickets", () => {
+
+    beforeEach(() => cy.visit('https://ticket-box.s3.eu-central-1.amazonaws.com/index.html'));
 
     it("TC01 - Input First and Last Name", () => {
         const firstName = 'Samuel';
@@ -17,8 +19,8 @@ describe ("Tickets", () => {
         const firstName = 'Samuel';
         const lastName = 'Luciano';
         const email = 'samuel019@gmail.com'
-        const textFull = 'Text Text'+ 
-        'Text Text';
+        const textFull = 'Text Text' +
+            'Text Text';
         const fullName = `${firstName} ${lastName}`
 
         cy.get('#first-name').type(firstName);
@@ -27,12 +29,12 @@ describe ("Tickets", () => {
         cy.get('#ticket-quantity').select("2");
         cy.get('#vip').check();
         cy.get('#publication').check();
-        cy.get('#requests').type(textFull, { delay: 0});
+        cy.get('#requests').type(textFull, { delay: 0 });
 
         cy.get('.agreement p').should('contain', `I, ${fullName}, wish to buy`);
 
         cy.get('#agree').check();
-        cy.get('#signature').type(fullName, { delay: 0});
+        cy.get('#signature').type(fullName, { delay: 0 });
 
         cy.get("button[type='submit']").click();
         cy.get('.success').should('be.visible');
@@ -41,18 +43,22 @@ describe ("Tickets", () => {
     });
 
 
-    it.only("TC03 - Compra de Ingresso Campos Obrigatórios", () => {
-        const user = {
-            firstName: 'Samuel',
-            lastName: 'Luciano',
-            email: 'samuel017@gmail.com'
-        }
-        
-        cy.filMandatory(user);
+    it.only("Comprar Tickets com sucesso - otimizado", () => {
 
-        cy.get("button[type='submit']").click();
-        cy.get('.success').should('be.visible');
-        cy.get('.success').should('have.text', 'Ticket(s) successfully ordered.');
+        cy.fixture("user.json").then((user) => {
+            ticketsPage.FirstName.type(user.firstName);
+            ticketsPage.LastName.type(user.lastName);
+            ticketsPage.Email.type(user.email);
+        })
 
+
+
+        ticketsPage.Agree.check();
+
+        ticketsPage.SubmitButton.click();
+
+
+        ticketsPage.Success.should('be.visible');
+        ticketsPage.Success.should('have.text', 'Ticket(s) successfully ordered.')
     });
 });
