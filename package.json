@@ -1,0 +1,27 @@
+{
+  "name": "cypress-pos-unipe",
+  "version": "1.0.0",
+  "description": "Curso de Cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faellima/cypress-pos-unipe.git"
+  },
+  "keywords": [
+    "cypress",
+    "unipe",
+    "test"
+  ],
+  "author": "Rafael Ramos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/faellima/cypress-pos-unipe/issues"
+  },
+  "homepage": "https://github.com/faellima/cypress-pos-unipe#readme",
+  "dependencies": {
+    "cypress": "^12.17.4"
+  }
+}
